@@ -46,10 +46,11 @@ export class World {
         const values = Object.values(FruitTypes).sort((a, b) => { return a.radius - b.radius });
         const index = values.indexOf(type);
         const next = values[index + 1];
-        if (next) {
+        
+        this.remove(fruitA);
+        this.remove(fruitB);
 
-            this.remove(fruitA);
-            this.remove(fruitB);
+        if (next) {
 
             const dx = fruitB.position.x - fruitA.position.x;
             const dy = fruitB.position.y - fruitA.position.y;
@@ -68,10 +69,11 @@ export class World {
 
             this.mergeFruitsListener?.(this.score);
 
-            return true; // Merged
+        } else {
+            this.score += fruitA.type.radius * 2;
         }
 
-        return false;
+        return true;
     }
 
     _handleFruitCollisions() {
