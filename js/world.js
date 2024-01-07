@@ -67,12 +67,11 @@ export class World {
 
             this.score += next.radius;
 
-            this.mergeFruitsListener?.(this.score);
-
         } else {
             this.score += fruitA.type.radius * 2;
         }
 
+        this.mergeFruitsListener?.(this.score);
         return true;
     }
 
